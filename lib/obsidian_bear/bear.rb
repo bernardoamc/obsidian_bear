@@ -2,7 +2,8 @@
 
 module ObsidianBear
   class Bear
-    FORMAT = %r{\A#(\w+)(/\w+)*\z}.freeze
+    TAG_FORMAT = %r{\A#(\w+)(/\w+)*\z}.freeze
+    ATTACHMENT_FORMAT = %r{\!\[\]\((?<path>.*)\)}.freeze
 
     def initialize(note_paths: [])
       @note_paths = note_paths
@@ -14,7 +15,7 @@ module ObsidianBear
 
         File.readlines(note_path).each do |line|
           line = line.strip
-          tags[note_path] << line[1..] if line.match(FORMAT)
+          tags[note_path] << line[1..] if line.match(TAG_FORMAT)
         end
 
         tags

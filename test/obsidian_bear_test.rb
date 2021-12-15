@@ -13,9 +13,12 @@ class ObsidianBearTest < Minitest::Test
 
     ObsidianBear.migrate(notes_path: 'test/data/obsidian')
 
+    assert Dir.exist?("test/data/obsidian/attachments")
+
+    assert File.exist?("test/data/obsidian/no_tags.md")
+    assert File.exist?("test/data/obsidian/note_with_attachment.md")
     assert File.exist?("test/data/obsidian/groceries/tasks/note_1.md")
     assert File.exist?("test/data/obsidian/work/tasks/note_2.md")
-    assert File.exist?("test/data/obsidian/no_tags.md")
     assert File.exist?("test/data/obsidian/groceries/tasks/multiple_tags.md")
     assert File.exist?("test/data/obsidian/work/tasks/multiple_tags.md")
 
