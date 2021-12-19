@@ -2,9 +2,20 @@
 
 Are you ready to migrate from Bear to Obsidian, let's go!
 
-## Steps
+## Prerequisites
 
-We have to execute a few steps before we run this code.
+We need to have the following installed:
+
+1. [git](https://github.com/git-guides/install-git)
+2. [Ruby](https://www.ruby-lang.org/en/documentation/installation/)
+3. [bundler](https://bundler.io/)
+
+Followed by these commands in your terminal:
+
+1. `git clone https://github.com/bernardoamc/obsidian_bear.git`
+2.  Go to this new folder: `cd obsidian_bear`
+
+### Export your Bear notes
 
 1. Export from Bear as `Markdown + Attachments` to a folder
 2. Backup your notes, seriously.
@@ -16,7 +27,7 @@ You can get the full path by running the following command in your _notes folder
 $ pwd
 ```
 
-4. Finally, run our code:
+## Running the tool
 
 ```sh
 bundle exec rake migrate <notes_path>
