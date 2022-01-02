@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "cgi"
 require "fileutils"
 
 module ObsidianBear
@@ -50,7 +51,7 @@ module ObsidianBear
             f.puts line.gsub(Bear::ATTACHMENT_FORMAT) { |_|
                 match = Regexp.last_match
                 updated_link = File.join(ATTACHMENTS_FOLDER, match[:path])
-                "![[#{updated_link}]]"
+                "![[#{CGI.unescape(updated_link)}]]"
             }
           end
         end
