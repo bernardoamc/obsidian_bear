@@ -32,6 +32,31 @@ module ObsidianBear
       )
     end
 
+    def test_extract_multiple_tags_in_line
+      summary = Bear.new(note_paths: [
+        "test/data/bear/multiple_tags_same_line.md",
+      ]).extract_tags
+
+      assert_equal(
+        {
+          "test/data/bear/multiple_tags_same_line.md" => ["learning", "programming/ruby", "programming_bear"],
+        },
+        summary
+      )
+    end
+
+    def test_prioritize_tags_with_more_specificity
+      summary = Bear.new(note_paths: [
+        "test/data/bear/specific_tags_same_line.md",
+      ]).extract_tags
+
+      assert_equal(
+        {
+          "test/data/bear/specific_tags_same_line.md" => ["programming/ruby"],
+        },
+        summary
+      )
+    end
 
     def test_extract_tags_returns_emtpy_hash_when_no_tags_are_found
       summary = Bear.new(note_paths: [
