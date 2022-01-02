@@ -1,6 +1,19 @@
 # ObsidianBear
 
-Are you ready to migrate from Bear to Obsidian, let's go!
+Are you ready to migrate from Bear to Obsidian? Let's go!
+
+This tool will:
+
+1. Parse Bear tags, create folders for each tag name and move notes to the appropriate folders
+2. Adjust attachments from Bear to Obsidian format
+
+Tags with a forward slash will create subfolders, for example:
+
+`#programming/ruby` will create the `programming` folder and a `ruby` folder inside it.
+
+Spaces within tags will be converted to underscore, for example:
+
+`#programming ruby#` will create a folder named `programming_ruby`
 
 ## Prerequisites
 
@@ -33,11 +46,11 @@ $ pwd
 bundle exec rake migrate <notes_path>
 ```
 
-5. Enjoy Obsidian!
+Enjoy Obsidian!
 
 ## Caveats
 
-When a note has _multiple tags_ the note will be duplicate into folders for each tag.
+When a note has _multiple tags_ the note will be duplicated into folders for each tag.
 
 ## Contributing
 
