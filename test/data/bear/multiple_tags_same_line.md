@@ -1,3 +1,4 @@
 # Multiple tags same line
 
-#learning and #programming/ruby and #programming bear#
+#multi word# and #programming/ruby and #programming bear#
+#simple and #programming/rust and #testing

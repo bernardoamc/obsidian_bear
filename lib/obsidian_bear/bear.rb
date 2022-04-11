@@ -22,7 +22,6 @@ module ObsidianBear
           end
         end
 
-
         tags[note_path] = find_unique_tag_paths(note_tags)
         tags
       end
@@ -32,7 +31,7 @@ module ObsidianBear
 
     # Tags have two distinct formats:
     #
-    # 1. Starting with # when the tag has not spaces: "#programming"
+    # 1. Starting with # when the tag has no spaces: "#programming"
     # 2. Enclosing # and the tag can contain spaces: "#programming ruby#"
     #
     # Since we are splitting by " #" we end up with malformed tags at their
@@ -44,19 +43,39 @@ module ObsidianBear
     #
     # ["#programming", "programming/ruby and", "cool tag#"]
     #
-    # 1. If a tag ends with '#' we strip it and replace splaces with underscores
-    # 2. If not we split by space and get the first value since the rest is not
+    # A second example:
+    #
+    # #multi word# and #programming/ruby and #cool tag#
+    #
+    # Once split this becomes:
+    #
+    # ["#multi word# and", "programming/ruby and", "cool tag#"]
+    #
+    # 1. If a tag contains "#" in any other position besides the first character
+    #    we know it is a multi word tag
+    # 2. Otherwise we know we have a simple tag
+    #
+    # Based on this we can make the following decisions
+    #
+    # 1. Strip any starting '#'
+    # 2. If we have a multi tag we read until the last '#' and replace spaces
+    #    with underscores
+    # 3. If not we split by space and get the first element since the rest is not
     #    supposed to be a tag
-    # 3. Last but not least we strip any starting '#'
     def format_tag(str)
-      tag = if str.end_with?('#')
-        str.chop.gsub(/[^\w\/]/, '_')
+      multi_tag = str[1..].include?('#')
+      str = str[1..] if str.start_with?('#')
+
+      if multi_tag
+        extract_multi_tag(str)
       else
         str.split.first
       end
+    end
 
-      tag = tag[1..] if tag.start_with?('#')
-      tag
+    def extract_multi_tag(str)
+      last_separator = str.rindex('#')
+      str[...last_separator].gsub(/[^\w\/]/, '_')
     end
 
     # If we have a tag called "programming" and one called "programming/ruby"
