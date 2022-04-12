@@ -39,7 +39,7 @@ module ObsidianBear
 
       assert_equal(
         {
-          "test/data/bear/multiple_tags_same_line.md" => ["learning", "programming/ruby", "programming_bear"],
+          "test/data/bear/multiple_tags_same_line.md" => ["multi_word", "programming/ruby", "programming_bear", "simple", "programming/rust", "testing"],
         },
         summary
       )
