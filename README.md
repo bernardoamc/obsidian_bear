@@ -50,7 +50,8 @@ Enjoy Obsidian!
 
 ## Caveats
 
-When a note has _multiple tags_ the note will be duplicated into folders for each tag.
+1. When a note has _multiple tags_ the note will be duplicated into folders for each tag.
+2. Since new folders and files are created the file metadata is not kept (creation date, updated at, etc..) 
 
 ## Contributing
 
