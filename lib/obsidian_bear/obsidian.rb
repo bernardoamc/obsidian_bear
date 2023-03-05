@@ -22,7 +22,7 @@ module ObsidianBear
         next unless File.directory?(path)
         next if entry == ATTACHMENTS_FOLDER
 
-        FileUtils.cp_r(path, attachments_path)
+        FileUtils.cp_r(path, attachments_path, preserve: true)
         FileUtils.rm_r(path)
       end
     end
@@ -56,7 +56,7 @@ module ObsidianBear
           end
         end
 
-        FileUtils.cp(temp_note, note_path)
+        FileUtils.cp(temp_note, note_path, preserve: true)
       end
 
       FileUtils.rm_r(migration_temp)
@@ -78,7 +78,7 @@ module ObsidianBear
       tags.each do |tag|
         create_folders(original_path, tag)
         new_note = File.join(original_path, tag, name)
-        FileUtils.cp(original_note, new_note)
+        FileUtils.cp(original_note, new_note, preserve: true)
       end
 
       FileUtils.rm(original_note)
